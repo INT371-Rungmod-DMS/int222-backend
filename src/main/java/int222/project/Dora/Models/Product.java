@@ -3,13 +3,14 @@ package int222.project.Dora.Models;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Product {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Getter
   @Setter
   private long productId;
@@ -34,5 +35,9 @@ public class Product {
   @Getter
   @Setter
   private long brandId;
-
+  @ManyToOne
+  @JoinColumn(name = "brandid")
+  private Brand brand;
+  @OneToMany(mappedBy = "Product")
+  Set<ProductColor> productcolor;
 }
