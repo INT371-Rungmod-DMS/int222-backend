@@ -20,10 +20,10 @@ public class Favorite {
   @Setter
   private long productColorId;
   @ManyToOne
-  @JoinColumn(name = "userid")
-  private User user;
+  @JoinColumn(name = "userId",insertable = false,updatable = false)
+  private User User;
   @ManyToOne
-  @JoinColumn(name = "productColorid")
-  private ProductColor productColor;
+  @JoinColumn(name = "productColorId",insertable = false,updatable = false)
+  private ProductColor ProductColor;
 
 }

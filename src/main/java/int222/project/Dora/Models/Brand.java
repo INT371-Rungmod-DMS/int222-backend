@@ -19,6 +19,6 @@ public class Brand {
   @Setter
   private String brandName;
   @OneToMany(mappedBy = "Brand")
-  Set<Product> product;
+  Set<int222.project.Dora.Models.Product> Product;
 
 }

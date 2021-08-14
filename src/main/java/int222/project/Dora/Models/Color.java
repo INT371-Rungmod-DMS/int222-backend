@@ -22,6 +22,6 @@ public class Color {
   @Setter
   private String colorCode;
   @OneToMany(mappedBy = "Color")
-  Set<ProductColor> productcolor;
+  Set<int222.project.Dora.Models.ProductColor> ProductColor;
 
 }

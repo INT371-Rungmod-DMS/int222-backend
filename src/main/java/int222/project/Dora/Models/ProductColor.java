@@ -27,11 +27,11 @@ public class ProductColor {
   @Setter
   private String imageName;
   @ManyToOne
-  @JoinColumn(name = "productid")
-  private Product product;
+  @JoinColumn(name = "productId",insertable = false,updatable = false)
+  private Product Product;
   @ManyToOne
-  @JoinColumn(name = "colorid")
-  private Color color;
+  @JoinColumn(name = "colorId",insertable = false,updatable = false)
+  private Color Color;
   @OneToMany(mappedBy = "ProductColor")
-  Set<Favorite> favorite;
+  Set<int222.project.Dora.Models.Favorite> Favorite;
 }

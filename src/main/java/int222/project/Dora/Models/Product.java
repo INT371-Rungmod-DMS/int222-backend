@@ -36,8 +36,8 @@ public class Product {
   @Setter
   private long brandId;
   @ManyToOne
-  @JoinColumn(name = "brandid")
-  private Brand brand;
+  @JoinColumn(name = "brandId",insertable = false,updatable = false)
+  private Brand Brand;
   @OneToMany(mappedBy = "Product")
-  Set<ProductColor> productcolor;
+  Set<int222.project.Dora.Models.ProductColor> ProductColor;
 }

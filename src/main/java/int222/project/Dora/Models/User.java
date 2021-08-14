@@ -30,6 +30,6 @@ public class User {
   @Setter
   private String role;
   @OneToMany(mappedBy = "User")
-  Set<Favorite> favorite;
+  Set<int222.project.Dora.Models.Favorite> Favorite;
 
 }
