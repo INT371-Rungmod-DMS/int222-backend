@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class Brand {
+public class brand {
 
   @Id
   @Getter
@@ -19,6 +19,6 @@ public class Brand {
   @Setter
   private String brandName;
   @OneToMany(mappedBy = "Brand")
-  Set<int222.project.Dora.Models.Product> Product;
+  Set<product> Product;
 
 }

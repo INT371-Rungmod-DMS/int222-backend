@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Entity
-public class Color {
+public class color {
 
   @Id
   @Getter
@@ -22,6 +22,6 @@ public class Color {
   @Setter
   private String colorCode;
   @OneToMany(mappedBy = "Color")
-  Set<int222.project.Dora.Models.ProductColor> ProductColor;
+  Set<productColor> ProductColor;
 
 }

@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-public class Favorite {
+public class favorite {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,9 +21,9 @@ public class Favorite {
   private long productColorId;
   @ManyToOne
   @JoinColumn(name = "userId",insertable = false,updatable = false)
-  private User User;
+  private user User;
   @ManyToOne
   @JoinColumn(name = "productColorId",insertable = false,updatable = false)
-  private ProductColor ProductColor;
+  private productColor ProductColor;
 
 }

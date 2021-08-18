@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class Product {
+public class product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Product {
   private long brandId;
   @ManyToOne
   @JoinColumn(name = "brandId",insertable = false,updatable = false)
-  private Brand Brand;
+  private brand Brand;
   @OneToMany(mappedBy = "Product")
-  Set<int222.project.Dora.Models.ProductColor> ProductColor;
+  Set<productColor> ProductColor;
 }

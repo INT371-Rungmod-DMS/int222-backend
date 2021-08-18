@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class ProductColor {
+public class productColor {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +28,10 @@ public class ProductColor {
   private String imageName;
   @ManyToOne
   @JoinColumn(name = "productId",insertable = false,updatable = false)
-  private Product Product;
+  private product Product;
   @ManyToOne
   @JoinColumn(name = "colorId",insertable = false,updatable = false)
-  private Color Color;
+  private color Color;
   @OneToMany(mappedBy = "ProductColor")
-  Set<int222.project.Dora.Models.Favorite> Favorite;
+  Set<favorite> Favorite;
 }

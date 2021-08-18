@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-public class User {
+public class user {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,6 @@ public class User {
   @Setter
   private String role;
   @OneToMany(mappedBy = "User")
-  Set<int222.project.Dora.Models.Favorite> Favorite;
+  Set<favorite> Favorite;
 
 }
