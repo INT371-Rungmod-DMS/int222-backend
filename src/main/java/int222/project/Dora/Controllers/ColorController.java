@@ -1,7 +1,8 @@
 package int222.project.Dora.Controllers;
 
-import int222.project.Dora.Models.brand;
-import int222.project.Dora.Repositories.BrandRepository;
+
+import int222.project.Dora.Models.color;
+import int222.project.Dora.Repositories.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,20 +13,20 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-public class BrandController {
+public class ColorController {
     @Autowired
-    BrandRepository brandRepository;
+    ColorRepository colorController;
 
-    @GetMapping("/showbrand")
-    public List<brand> showBrand(@RequestParam(defaultValue = "0") Integer pageNo,
+    @GetMapping("/showallcolor")
+    public List<color> showColor(@RequestParam(defaultValue = "0") Integer pageNo,
                                  @RequestParam(defaultValue = "50") Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<brand> pageResult = brandRepository.findAll(pageable);
+        Page<color> pageResult = colorController.findAll(pageable);
         return pageResult.getContent();
     }
 
-    @GetMapping("/showbrand/{id}")
-    public brand showById(@PathVariable long id) {
-        return brandRepository.findById(id).orElse(null);
+    @GetMapping("/showcolorbyid/{id}")
+    public color showColorById(@PathVariable Long id) {
+        return colorController.findById(id).orElse(null);
     }
 }
