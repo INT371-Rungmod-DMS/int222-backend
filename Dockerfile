@@ -7,5 +7,5 @@ RUN mvn -f $PWD/pom.xml clean package
 #Stage
 FROM adoptopenjdk/openjdk11:latest
 EXPOSE 80
-COPY --from=build $PWD/target/demo-0.0.1-SNAPSHOT.jar /usr/local/lib/demo.jar
+COPY --from=build $PWD/target/Dora-0.0.1-SNAPSHOT.jar /usr/local/lib/demo.jar
 ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
