@@ -24,12 +24,12 @@ public class UserController {
         return pageResult.getContent();
     }
 
-    @GetMapping("/showuser/{id}")
+    @GetMapping("/{id}/showuser")
     public user showUserByid(@PathVariable Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    @PutMapping("/editProfile/{id}")
+    @PutMapping("/{id}/editProfile")
     public void editProfile(@PathVariable Long id,
                             @RequestParam("username") String username,
                             @RequestParam("name") String name,
@@ -45,7 +45,7 @@ public class UserController {
         System.out.println("Lastname change to " + editProfile.getLastName());
     }
 
-    @PutMapping("/profile/ChangePWD{id}")
+    @PutMapping("/{id}/profile/ChangePWD")
     public void changPWD(@PathVariable Long id,
                          @RequestParam("password") String pwd) {
         user changePWD = userRepository.findById(id).orElse(null);
