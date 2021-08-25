@@ -3,7 +3,7 @@ services:
   backend:
     container_name: "backend"
     build: .
-    image: dora/image
+    image: ghcr.io/artidsun/bookinfo-details
     volumes:
       - $PWD/public:/tmp
     ports:
