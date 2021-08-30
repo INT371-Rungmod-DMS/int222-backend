@@ -1,6 +1,6 @@
 package int222.project.Dora.Controllers;
 
-import int222.project.Dora.Models.brand;
+
 import int222.project.Dora.Models.favorite;
 import int222.project.Dora.Models.productColor;
 import int222.project.Dora.Models.user;
@@ -8,9 +8,6 @@ import int222.project.Dora.Repositories.FavoriteRepository;
 import int222.project.Dora.Repositories.ProductColorRepository;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

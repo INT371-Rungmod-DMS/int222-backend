@@ -22,7 +22,7 @@ public class productColor {
   private long colorId;
   @Getter
   @Setter
-  private long stock;
+  private int stock;
   @Getter
   @Setter
   private String imageName;
