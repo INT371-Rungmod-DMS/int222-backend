@@ -1,6 +1,6 @@
 name: deploy-backend-int222
 on:
-  pull_request:
+  push:
     branches:
       - main
 jobs:
@@ -11,8 +11,8 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ArtidSun
-          password: sun45969
+          username: ${{ github.actor }}
+          password: ${{ secrets.TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
