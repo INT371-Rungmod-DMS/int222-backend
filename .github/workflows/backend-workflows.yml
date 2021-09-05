@@ -25,4 +25,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@main
       - name: deploy by docker-compose
-        uses: actions/int222-backend@main
+        uses: docker/ghcr.io/artidsun/int222-backend@main
