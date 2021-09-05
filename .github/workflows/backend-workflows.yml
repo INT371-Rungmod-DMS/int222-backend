@@ -24,5 +24,5 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@main
-      - name: deploy by docker-compose
-        uses: docker/ghcr.io/artidsun/int222-backend@main
+      - name: deploy
+        uses: deliverybot/docker@v1
