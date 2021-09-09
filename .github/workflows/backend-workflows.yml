@@ -25,10 +25,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@main
       - name: Azure Login
-        uses: azure/login@v1
-        with:
-          credentials: ${{ secrets.AZURE_CREDENTIALS }}
-        env:
-          credentials: ${{ secrets.AZURE_CREDENTIALS }}
+          uses: azure/login@v1
+          with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Install ASC AZ extension
+          run: az extension add --name spring-cloud
       - name: deploy
         run: sudo docker-compose up -d
