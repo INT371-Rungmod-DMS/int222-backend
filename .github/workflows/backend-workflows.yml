@@ -16,9 +16,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./
           push: true
-          tags: ghcr.io/artidsun/int222-backend
+          tags: ghcr.io/INT222-Integragrade-Project/int222-backend
   deploy:
     needs: build
     runs-on: ubuntu-20.04
