@@ -17,7 +17,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/artidsun/int222-integragrade-project/int222-backend
+          tags: ghcr.io/artidsun/int222-backend
   deploy:
     needs: build
     runs-on: ubuntu-20.04
@@ -28,3 +28,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: deploy
+        run: |
+          docker pull ghcr.io/artidsun/int222-backend
+          docker run -d int222-backend
