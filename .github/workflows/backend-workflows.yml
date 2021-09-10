@@ -31,4 +31,4 @@ jobs:
       - name: deploy
         run: |
           docker pull ghcr.io/artidsun/int222-backend:latest
-          docker run -d int222-backend
+          docker run -d ghcr.io/artidsun/int222-backend:latest
