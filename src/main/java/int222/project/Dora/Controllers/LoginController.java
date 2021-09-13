@@ -3,9 +3,7 @@ package int222.project.Dora.Controllers;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -13,6 +11,7 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
 
+    @GetMapping("/login")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
@@ -20,7 +19,7 @@ public class LoginController {
         user logInUser = (pwd == findUser.getPassword() ? findUser : null);
         return logInUser;
     }
-
+    @PostMapping("/register")
     public void register(@RequestParam("username") String username,
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
