@@ -2,7 +2,6 @@ version: "2.2"
 services:
   backend:
     container_name: "backend"
-    build: .
     image: int222-backend
     volumes:
       - $PWD/public:/tmp
