@@ -3,7 +3,7 @@ services:
   backend:
     container_name: "backend"
     build: .
-    image: ghcr.io/artidsun/int222-backend
+    image: int222-backend
     volumes:
       - $PWD/public:/tmp
     ports:

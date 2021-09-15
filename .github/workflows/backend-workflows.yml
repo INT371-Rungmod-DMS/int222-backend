@@ -4,31 +4,37 @@ on:
     branches:
       - main
 jobs:
-  build:
+  Login-VM:
     runs-on: ubuntu-20.04
     steps:
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+      - name: remote SSH command using password
+        uses: appleboy/ssh-action@master
         with:
-          registry: ghcr.io
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.TOKEN }}
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ghcr.io/artidsun/int222-backend:latest
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          port: ${{ secrets.SSH_PORT }}
+          script: whoami
+  build:
+    need: Login-VM
+    runs-on: ubuntu-20.04
+    steps:
+      - name: build images docker-compose
+        run: |
+          cd int222-backend
+          git pull origin main
+          sudo docker-compose build
   deploy:
     needs: build
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@main
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
       - name: deploy
         run: |
-          docker pull ghcr.io/artidsun/int222-backend:latest
-          docker run -d ghcr.io/artidsun/int222-backend:latest
+          docker run -d int222-backend
+  Logout-VM:
+    needs: deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log out vm
+        run: |
+          exit

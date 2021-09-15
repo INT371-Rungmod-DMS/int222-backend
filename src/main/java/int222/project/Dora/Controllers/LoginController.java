@@ -11,7 +11,7 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login")
+//    @GetMapping("/login/")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
@@ -19,7 +19,7 @@ public class LoginController {
         user logInUser = (pwd == findUser.getPassword() ? findUser : null);
         return logInUser;
     }
-    @PostMapping("/register")
+    @PostMapping("/register/")
     public void register(@RequestParam("username") String username,
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
