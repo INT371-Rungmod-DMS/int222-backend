@@ -1,10 +1,10 @@
-name: new-deploy-backend-int222
+name: deploy-backend-int222
 on:
   push:
     branches:
       - main
 jobs:
-  Login-VM:
+  loginVM:
     runs-on: ubuntu-20.04
     steps:
       - name: remote SSH command using password
@@ -16,7 +16,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: whoami
   build:
-    need: Login-VM
+    needs: loginVM
     runs-on: ubuntu-20.04
     steps:
       - name: build images docker-compose
@@ -31,7 +31,7 @@ jobs:
       - name: deploy
         run: |
           docker run -d int222-backend
-  Logout-VM:
+  logoutVM:
     needs: deploy
     runs-on: ubuntu-20.04
     steps:
