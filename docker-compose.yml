@@ -2,7 +2,7 @@ version: "2.2"
 services:
   backend:
     container_name: "backend"
-    image: int222-backend
+    image: ghcr.io/artidsun/int222-backend:latest
     volumes:
       - $PWD/public:/tmp
     ports:
