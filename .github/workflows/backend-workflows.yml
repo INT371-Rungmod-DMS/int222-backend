@@ -22,6 +22,8 @@ jobs:
     needs: build
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout code
+        uses: actions/checkout@main
       - name: pull images and deploy
         uses: appleboy/ssh-action@master
         with:
