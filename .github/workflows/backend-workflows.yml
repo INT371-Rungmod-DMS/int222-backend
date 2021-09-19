@@ -32,4 +32,4 @@ jobs:
           script: |
             cd int222-backend
             sudo docker pull ghcr.io/artidsun/int222-backend:latest
-            sudo docker compose up -d
+            sudo docker-compose up -d
