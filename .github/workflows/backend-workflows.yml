@@ -14,24 +14,21 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
           port: ${{ secrets.SSH_PORT }}
-          script: whoami
-      - name: build images docker-compose
-        run: |
-          cd int222-backend
-          git pull origin main
-          sudo docker-compose build
-  deploy:
-    needs: build
-    runs-on: ubuntu-20.04
-    steps:
-      - name: remote SSH command using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          port: ${{ secrets.SSH_PORT }}
-          script: whoami
-      - name: deploy
-        run: |
-          docker run -d int222-backend
+          script: |
+            cd int222-backend
+            git pull origin main
+            sudo docker build -t backend .
+#  deploy:
+#    needs: build
+#    runs-on: ubuntu-20.04
+#    steps:
+#      - name: remote SSH command using password
+#        uses: appleboy/ssh-action@master
+#        with:
+#          host: ${{ secrets.SSH_HOST }}
+#          username: ${{ secrets.SSH_USERNAME }}
+#          password: ${{ secrets.SSH_PASSWORD }}
+#          port: ${{ secrets.SSH_PORT }}
+#          script: |
+#            cd int222-backend
+#            sudo docker run -d backend

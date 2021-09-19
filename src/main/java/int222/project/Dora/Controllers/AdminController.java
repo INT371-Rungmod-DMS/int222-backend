@@ -16,7 +16,7 @@ public class AdminController {
     ProductRepository productRepository;
 
     @PostMapping("/add")
-    public void addProduct(@RequestParam("productname") String productname,
+    public Long addProduct(@RequestParam("productname") String productname,
                            @RequestParam("price") double price,
                            @RequestParam("warranty") String warranty,
                            @RequestParam("menufacturrerdate") java.sql.Date menufacturrerdate,
@@ -33,6 +33,21 @@ public class AdminController {
         newproduct.setBrandId(brandId);
         productRepository.save(newproduct);
         System.out.println("Add new product ID is " + newproduct.getProductId());
+        return newproduct.getProductId();
+    }
+
+    @PostMapping("/addColorImage")
+    public void addProductColorImage(@RequestParam("productid") Long productid,
+                                @RequestParam("colorid") Long colorid,
+                                @RequestParam("stock") int stock,
+                                @RequestParam("images") String imageName){
+        productColor addcolor = new productColor();
+        addcolor.setProductId(productid);
+        addcolor.setColorId(colorid);
+        addcolor.setStock(stock);
+        addcolor.setImageName(imageName);
+        productColorRepository.save(addcolor);
+        System.out.println("Product ID: " + productid + " add new color is " + colorid + " image name is " + addcolor.getImageName());
     }
 
     @PutMapping("/edit/{id}")
@@ -57,7 +72,8 @@ public class AdminController {
     }
 
     @DeleteMapping("/deleteproductid")
-    public void delete(@RequestParam("deleteproductid") long id) {
+    public void delete(@RequestParam("deleteproductid") Long id) {
+        productColorRepository.deleteAllByProductId(id);
         productRepository.deleteById(id);
         System.out.println("Delete product id: " + id + " success");
     }
