@@ -31,5 +31,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd int222-backend
+            git pull origin main
             sudo docker pull ghcr.io/artidsun/int222-backend:latest
             sudo docker-compose up -d
