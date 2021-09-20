@@ -21,18 +21,18 @@ public class PictureController {
     }
 
     @PostMapping("/upload")
-    public void uploadFile(MultipartFile file) {
+    public void uploadFile(@RequestParam("upload") MultipartFile file) {
         storageService.store(file);
         System.out.print("You ca upload file" + file);
     }
 
     @GetMapping(value = "/file/{filename}", produces = MediaType.IMAGE_PNG_VALUE)
-    public Resource serveFile(String filename) {
+    public Resource serveFile(@PathVariable String filename) {
         return storageService.loadAsResource(filename);
     }
 
     @DeleteMapping(value = "/deletefile", produces = MediaType.IMAGE_PNG_VALUE)
-    public void deleteFile(String filename) throws IOException {
+    public void deleteFile(@RequestParam("deleteimages") String filename) throws IOException {
         storageService.delete(filename);
     }
 }
