@@ -11,7 +11,7 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
 
-//    @GetMapping("/login/")
+    @GetMapping("/login/")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
