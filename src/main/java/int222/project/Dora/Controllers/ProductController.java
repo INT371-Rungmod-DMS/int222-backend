@@ -24,6 +24,8 @@ public class ProductController {
         return pageResult.getContent();
     }
 
+
+
     @GetMapping("/show/{id}")
     public product addProduct(@PathVariable Long id) {
         return productRepository.findById(id).orElse(null);

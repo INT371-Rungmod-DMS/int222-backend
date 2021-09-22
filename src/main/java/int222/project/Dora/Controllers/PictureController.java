@@ -1,6 +1,9 @@
 package int222.project.Dora.Controllers;
 
 import int222.project.Dora.File.StorageService;
+import int222.project.Dora.Models.productColor;
+import int222.project.Dora.Repositories.ProductColorRepository;
+import int222.project.Dora.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -14,6 +17,8 @@ import java.io.IOException;
 public class PictureController {
 
     final StorageService storageService;
+    @Autowired
+    ProductColorRepository productColorRepository;
 
     @Autowired
     public PictureController(StorageService storageService) {
@@ -24,6 +29,13 @@ public class PictureController {
     public void uploadFile(@RequestParam("upload") MultipartFile file) {
         storageService.store(file);
         System.out.print("You ca upload file" + file);
+    }
+
+    @GetMapping(value = "/file/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public Resource getproductpic1File(@PathVariable Long id) {
+        productColor[] pdc = productColorRepository.findAllByProductId(id);
+        String filename = pdc[0].getImageName();
+        return storageService.loadAsResource(filename);
     }
 
     @GetMapping(value = "/file/{filename}", produces = MediaType.IMAGE_PNG_VALUE)
