@@ -31,7 +31,7 @@ public class PictureController {
         System.out.print("You ca upload file" + file);
     }
 
-    @GetMapping(value = "/file/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    @GetMapping(value = "/getfirstpic/{id}", produces = MediaType.IMAGE_PNG_VALUE)
     public Resource getproductpic1File(@PathVariable Long id) {
         productColor[] pdc = productColorRepository.findAllByProductId(id);
         String filename = pdc[0].getImageName();
