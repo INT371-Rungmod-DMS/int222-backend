@@ -4,7 +4,7 @@ services:
     container_name: "backend"
     image: ghcr.io/artidsun/int222-backend:latest
     volumes:
-      - /home/project/int222-backend/storageImages:./
+      - /home/project/int222-backend/storageImages:.
     ports:
       - "3000:80"
     restart: on-failure
