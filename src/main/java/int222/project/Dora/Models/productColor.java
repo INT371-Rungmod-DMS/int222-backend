@@ -32,6 +32,5 @@ public class productColor {
   @ManyToOne
   @JoinColumn(name = "colorId",insertable = false,updatable = false)
   private color Color;
-  @OneToMany(mappedBy = "ProductColor")
-  Set<favorite> Favorite;
+
 }

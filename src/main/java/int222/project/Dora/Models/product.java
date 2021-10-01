@@ -40,4 +40,6 @@ public class product {
   private brand Brand;
   @OneToMany(mappedBy = "Product")
   Set<productColor> ProductColor;
+  @OneToMany(mappedBy = "Product")
+  Set<favorite> Favorite;
 }

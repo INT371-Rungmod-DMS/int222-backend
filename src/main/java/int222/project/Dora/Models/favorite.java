@@ -18,12 +18,12 @@ public class favorite {
   private long userId;
   @Getter
   @Setter
-  private long productColorId;
+  private long productId;
   @ManyToOne
   @JoinColumn(name = "userId",insertable = false,updatable = false)
   private user User;
   @ManyToOne
-  @JoinColumn(name = "productColorId",insertable = false,updatable = false)
-  private productColor ProductColor;
+  @JoinColumn(name = "productId",insertable = false,updatable = false)
+  private product Product;
 
 }

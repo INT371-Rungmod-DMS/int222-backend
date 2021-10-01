@@ -2,10 +2,10 @@ package int222.project.Dora.Controllers;
 
 
 import int222.project.Dora.Models.favorite;
-import int222.project.Dora.Models.productColor;
+import int222.project.Dora.Models.product;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.FavoriteRepository;
-import int222.project.Dora.Repositories.ProductColorRepository;
+import int222.project.Dora.Repositories.ProductRepository;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class CustomerController {
     @Autowired
     FavoriteRepository favoriteRepository;
     @Autowired
-    ProductColorRepository productColorRepository;
+    ProductRepository productRepository;
     @Autowired
     UserRepository userRepository;
 
@@ -30,19 +30,19 @@ public class CustomerController {
     }
 
     @PostMapping("/{id}/AddFav/")
-    public void favorite(@RequestParam("idProductColor") Long idProductColor,
+    public void favorite(@RequestParam("productId") Long idProduct,
                          @PathVariable("id") Long id) {
-        productColor favorite = productColorRepository.findById(idProductColor).orElse(null);
-        long productColorid = favorite.getProductColorId();
-        System.out.println(productColorid);
+        product favorite = productRepository.findById(idProduct).orElse(null);
+        long productId = favorite.getProductId();
+        System.out.println(productId);
         user userAdd = userRepository.findById(id).orElse(null);
         long userId = userAdd.getUserId();
         favorite newFav = new favorite();
-        newFav.setProductColorId(productColorid);
+        newFav.setProductId(productId);
         newFav.setUserId(userId);
         System.out.println(newFav);
         System.out.println(newFav.getUserId());
-        System.out.println(newFav.getProductColorId());
+        System.out.println(newFav.getProductId());
         favoriteRepository.save(newFav);
     }
 
