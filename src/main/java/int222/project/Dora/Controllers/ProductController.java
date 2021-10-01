@@ -17,14 +17,10 @@ public class ProductController {
     ProductRepository productRepository;
 
     @GetMapping("/show")
-    public List<product> allProduct(@RequestParam(defaultValue = "0") Integer pageNo,
-                                    @RequestParam(defaultValue = "50") Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo, pageSize);
-        Page<product> pageResult = productRepository.findAll(pageable);
-        return pageResult.getContent();
+    public List<product> allProduct() {
+        List<product> allproduct = productRepository.findAll();
+        return allproduct;
     }
-
-
 
     @GetMapping("/show/{id}")
     public product addProduct(@PathVariable Long id) {

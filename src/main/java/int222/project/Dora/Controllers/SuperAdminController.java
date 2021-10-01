@@ -8,12 +8,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*")
 @RestController
 public class SuperAdminController {
     @Autowired
     UserRepository userRepository;
 
+    public List<user> showallUser(){
+        List<user> alluser = userRepository.findAll();
+        return alluser;
+    }
     @PutMapping("/PromoteRole")
     public void changeRole(@RequestParam("idUser") long idUser,
                            @RequestParam("Role") String role){
