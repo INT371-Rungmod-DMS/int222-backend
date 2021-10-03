@@ -28,9 +28,9 @@ public class productColor {
   private String imageName;
   @ManyToOne
   @JoinColumn(name = "productId",insertable = false,updatable = false)
-  private product Product;
+  private product product;
   @ManyToOne
   @JoinColumn(name = "colorId",insertable = false,updatable = false)
-  private color Color;
+  private color color;
 
 }

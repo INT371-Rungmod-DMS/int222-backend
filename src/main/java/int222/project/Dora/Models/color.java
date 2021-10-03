@@ -21,7 +21,7 @@ public class color {
   @Getter
   @Setter
   private String colorCode;
-  @OneToMany(mappedBy = "Color")
-  Set<productColor> ProductColor;
+  @OneToMany(mappedBy = "color")
+  Set<productColor> productColor;
 
 }

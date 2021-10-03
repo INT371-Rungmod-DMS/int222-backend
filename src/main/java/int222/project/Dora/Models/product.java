@@ -37,9 +37,9 @@ public class product {
   private long brandId;
   @ManyToOne
   @JoinColumn(name = "brandId",insertable = false,updatable = false)
-  private brand Brand;
-  @OneToMany(mappedBy = "Product")
-  Set<productColor> ProductColor;
-  @OneToMany(mappedBy = "Product")
-  Set<favorite> Favorite;
+  private brand brand;
+  @OneToMany(mappedBy = "product")
+  Set<productColor> productColor;
+  @OneToMany(mappedBy = "product")
+  Set<favorite> favorite;
 }

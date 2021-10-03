@@ -29,7 +29,7 @@ public class user {
   @Getter
   @Setter
   private String role;
-  @OneToMany(mappedBy = "User")
-  Set<favorite> Favorite;
+  @OneToMany(mappedBy = "user")
+  Set<favorite> favorite;
 
 }

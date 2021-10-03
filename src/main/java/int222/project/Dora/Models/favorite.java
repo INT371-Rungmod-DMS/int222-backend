@@ -21,9 +21,9 @@ public class favorite {
   private long productId;
   @ManyToOne
   @JoinColumn(name = "userId",insertable = false,updatable = false)
-  private user User;
+  private user user;
   @ManyToOne
   @JoinColumn(name = "productId",insertable = false,updatable = false)
-  private product Product;
+  private product product;
 
 }

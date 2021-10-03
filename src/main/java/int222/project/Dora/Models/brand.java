@@ -18,7 +18,7 @@ public class brand {
   @Getter
   @Setter
   private String brandName;
-  @OneToMany(mappedBy = "Brand")
-  Set<product> Product;
+  @OneToMany(mappedBy = "brand")
+  Set<product> product;
 
 }
