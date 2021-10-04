@@ -73,7 +73,14 @@ public class AdminController {
 
     @DeleteMapping("/deleteproductid")
     public void delete(@RequestParam("deleteproductid") Long id) {
-        productColorRepository.deleteAllByProductId(id);
+        int check = productColorRepository.countAllByProductId(id);
+        System.out.println("productcolor: " + check);
+        if (check != 0) {
+            productColor dpc[] = productColorRepository.findAllByProductId(id);
+            for (int i = 0; i < dpc.length; i++) {
+                productColorRepository.delete(dpc[i]);
+            }
+        }
         productRepository.deleteById(id);
         System.out.println("Delete product id: " + id + " success");
     }

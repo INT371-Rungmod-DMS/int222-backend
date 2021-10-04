@@ -9,4 +9,5 @@ public interface ProductColorRepository extends JpaRepository<productColor, Long
     productColor[] deleteAllByProductId (Long id);
     productColor[] findAllByProductId (Long id);
     productColor findByProductId (Long id);
+    int countAllByProductId(Long id);
 }
