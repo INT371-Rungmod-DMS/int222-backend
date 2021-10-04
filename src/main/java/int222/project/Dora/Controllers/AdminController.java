@@ -1,11 +1,14 @@
 package int222.project.Dora.Controllers;
 
+import int222.project.Dora.File.StorageService;
 import int222.project.Dora.Models.product;
 import int222.project.Dora.Models.productColor;
 import int222.project.Dora.Repositories.ProductColorRepository;
 import int222.project.Dora.Repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -14,6 +17,12 @@ public class AdminController {
     ProductColorRepository productColorRepository;
     @Autowired
     ProductRepository productRepository;
+    final StorageService storageService;
+
+    @Autowired
+    public AdminController(StorageService storageService) {
+        this.storageService = storageService;
+    }
 
     @PostMapping("/add")
     public Long addProduct(@RequestParam("productname") String productname,
@@ -73,6 +82,7 @@ public class AdminController {
 
     @DeleteMapping("/deleteproductid")
     public void delete(@RequestParam("deleteproductid") Long id) {
+        product pdc = productRepository.findById(id).orElse(null);
         int check = productColorRepository.countAllByProductId(id);
         System.out.println("productcolor: " + check);
         if (check != 0) {
