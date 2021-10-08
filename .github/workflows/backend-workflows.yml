@@ -43,6 +43,12 @@ jobs:
     needs: deploy
     runs-on: ubuntu-20.04
     steps:
-      - name: Check container status
-        run: |
-          sudo docker inspect backend | grep ""Status": "running""
+      - name: check status container
+        uses: appleboy/ssh-action@master
+        with:
+           host: ${{ secrets.SSH_HOST }}
+           username: ${{ secrets.SSH_USERNAME }}
+           password: ${{ secrets.SSH_PASSWORD }}
+           port: ${{ secrets.SSH_PORT }}
+           script: |
+            sudo docker inspect backend | grep ""Status": "running""
