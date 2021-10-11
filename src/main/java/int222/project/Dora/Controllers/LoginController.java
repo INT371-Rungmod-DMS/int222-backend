@@ -12,12 +12,12 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping("/login/")
-    public user logIn(@RequestParam("username") String username,
+    public String logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
         userRepository.findByPassword(findUser.getPassword());
         user logInUser = (pwd == findUser.getPassword() ? findUser : null);
-        return logInUser;
+        return logInUser.getRole();
     }
     @PostMapping("/register/")
     public void register(@RequestParam("username") String username,
@@ -30,5 +30,6 @@ public class LoginController {
         newUser.setLastName(lastname);
         newUser.setPassword(pwd);
         userRepository.save(newUser);
+        System.out.println(newUser.getUserId());
     }
 }
