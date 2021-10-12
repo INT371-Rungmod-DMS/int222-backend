@@ -30,19 +30,20 @@ public class UserController {
     }
 
     @PutMapping("/{id}/editProfile")
-    public void editProfile(@PathVariable Long id,
-                            @RequestParam("username") String username,
-                            @RequestParam("name") String name,
-                            @RequestParam("lastname") String lastname) {
+    public boolean editProfile(@PathVariable Long id,
+                               @RequestParam("username") String username,
+                               @RequestParam("name") String name,
+                               @RequestParam("lastname") String lastname) {
         user editProfile = userRepository.findById(id).orElse(null);
-        editProfile.setName(username);
-        editProfile.setLastName(name);
+        editProfile.setUserName(username);
+        editProfile.setName(name);
         editProfile.setLastName(lastname);
         userRepository.save(editProfile);
         System.out.println("Change profile id: " + editProfile.getUserId());
         System.out.println("Username change to " + editProfile.getUserName());
         System.out.println("Firstname change to " + editProfile.getName());
         System.out.println("Lastname change to " + editProfile.getLastName());
+        return true;
     }
 
     @PutMapping("/{id}/profile/ChangePWD")

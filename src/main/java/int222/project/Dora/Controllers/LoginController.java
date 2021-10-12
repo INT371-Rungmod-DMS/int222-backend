@@ -22,17 +22,24 @@ public class LoginController {
         return logInUser.getRole();
     }
     @PostMapping("/register/")
-    public void register(@RequestParam("username") String username,
+    public boolean register(@RequestParam("username") String username,
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
                          @RequestParam("password") String pwd) {
-        user newUser = new user();
-        newUser.setUserName(username);
-        newUser.setName(firstname);
-        newUser.setLastName(lastname);
-        newUser.setPassword(pwd);
-        userRepository.save(newUser);
-        System.out.println(newUser.getUserId());
+        if (checkUsername(username)) {
+            user newUser = new user();
+            newUser.setUserName(username);
+            newUser.setName(firstname);
+            newUser.setLastName(lastname);
+            newUser.setPassword(pwd);
+            newUser.setRole("customer");
+            userRepository.save(newUser);
+            System.out.println(newUser.getUserId());
+            return true;
+        } else{
+            System.out.println("already username");
+            return false;
+        }
     }
 
     @GetMapping("/checkusername/")
