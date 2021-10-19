@@ -28,6 +28,7 @@ public class SuperAdminController {
                 break;
             case 0:
                 Roleuser.setRole("customer");
+                break;
         }
         userRepository.save(Roleuser);
     }
