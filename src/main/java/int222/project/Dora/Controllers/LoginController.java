@@ -14,25 +14,33 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping("/login/")
-    public String logIn(@RequestParam("username") String username,
+    public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
         userRepository.findByPassword(findUser.getPassword());
         user logInUser = (pwd == findUser.getPassword() ? findUser : null);
-        return logInUser.getRole();
+        logInUser.setPassword("********");
+        return logInUser;
     }
     @PostMapping("/register/")
-    public void register(@RequestParam("username") String username,
+    public boolean register(@RequestParam("username") String username,
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
                          @RequestParam("password") String pwd) {
-        user newUser = new user();
-        newUser.setUserName(username);
-        newUser.setName(firstname);
-        newUser.setLastName(lastname);
-        newUser.setPassword(pwd);
-        userRepository.save(newUser);
-        System.out.println(newUser.getUserId());
+        if (checkUsername(username)) {
+            user newUser = new user();
+            newUser.setUserName(username);
+            newUser.setName(firstname);
+            newUser.setLastName(lastname);
+            newUser.setPassword(pwd);
+            newUser.setRole("customer");
+            userRepository.save(newUser);
+            System.out.println(newUser.getUserId());
+            return true;
+        } else{
+            System.out.println("already username");
+            return false;
+        }
     }
 
     @GetMapping("/checkusername/")
