@@ -20,9 +20,16 @@ public class SuperAdminController {
     }
     @PutMapping("/PromoteRole")
     public void changeRole(@RequestParam("idUser") long idUser,
-                           @RequestParam("Role") String role){
+                           @RequestParam("Role") int role){
         user Roleuser = userRepository.findById(idUser).orElse(null);
-        Roleuser.setRole(role);
+        switch (role){
+            case 1:
+                Roleuser.setRole("admin");
+                break;
+            case 0:
+                Roleuser.setRole("customer");
+                break;
+        }
         userRepository.save(Roleuser);
     }
 }
