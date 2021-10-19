@@ -16,11 +16,9 @@ public class LoginController {
     @GetMapping("/login/")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
-        user findUser = userRepository.findByUserName(username);
-        userRepository.findByPassword(findUser.getPassword());
-        user logInUser = (pwd == findUser.getPassword() ? findUser : null);
-        logInUser.setPassword("********");
-        return logInUser;
+        user login = userRepository.findByUserNameAndPassword(username, pwd);
+        login.setPassword("********");
+        return login;
     }
     @PostMapping("/register/")
     public boolean register(@RequestParam("username") String username,
