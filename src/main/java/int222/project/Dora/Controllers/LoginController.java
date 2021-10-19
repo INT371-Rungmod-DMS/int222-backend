@@ -14,12 +14,13 @@ public class LoginController {
     UserRepository userRepository;
 
     @GetMapping("/login/")
-    public String logIn(@RequestParam("username") String username,
+    public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         user findUser = userRepository.findByUserName(username);
         userRepository.findByPassword(findUser.getPassword());
         user logInUser = (pwd == findUser.getPassword() ? findUser : null);
-        return logInUser.getRole();
+        logInUser.setPassword("********");
+        return logInUser;
     }
     @PostMapping("/register/")
     public boolean register(@RequestParam("username") String username,
