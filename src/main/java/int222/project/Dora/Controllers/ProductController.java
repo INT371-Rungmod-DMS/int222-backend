@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     @GetMapping("/show/{id}")
-    public product addProduct(@PathVariable Long id) {
+    public product showProductById(@PathVariable Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
