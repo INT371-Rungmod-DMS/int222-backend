@@ -1,18 +1,7 @@
 version: "2.2"
 services:
-  nginx:
-    container_name: "backend"
-    image: nginx:latest
-    restart: always
-    ports:
-      - "443:443"
-      - "3000:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d
-    depends_on:
-      - backend
-
   backend:
+    container_name: "backend"
     image: ghcr.io/artidsun/int222-backend:latest
     volumes:
       - /home/project/int222-backend/storageImages:/storageImages
