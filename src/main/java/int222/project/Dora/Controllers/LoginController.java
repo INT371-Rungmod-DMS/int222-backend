@@ -1,5 +1,6 @@
 package int222.project.Dora.Controllers;
 
+import int222.project.Dora.Exception.LoginException;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,13 @@ public class LoginController {
     @GetMapping("/login/")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
+        try {
         user login = userRepository.findByUserNameAndPassword(username, pwd);
         login.setPassword("********");
         return login;
+        }catch (Exception e){
+            throw new LoginException("Invalid Username or Password");
+        }
     }
     @PostMapping("/register/")
     public boolean register(@RequestParam("username") String username,
