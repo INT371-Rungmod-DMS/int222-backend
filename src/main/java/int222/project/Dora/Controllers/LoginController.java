@@ -4,6 +4,8 @@ import int222.project.Dora.Exception.LoginException;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 public class LoginController {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     UserRepository userRepository;
 
@@ -30,12 +35,13 @@ public class LoginController {
                          @RequestParam("firstname") String firstname,
                          @RequestParam("lastname") String lastname,
                          @RequestParam("password") String pwd) {
+        String encodepassword = bCryptPasswordEncoder.encode(pwd);
         if (checkUsername(username)) {
             user newUser = new user();
             newUser.setUserName(username);
             newUser.setName(firstname);
             newUser.setLastName(lastname);
-            newUser.setPassword(pwd);
+            newUser.setPassword(encodepassword);
             newUser.setRole("customer");
             userRepository.save(newUser);
             System.out.println(newUser.getUserId());

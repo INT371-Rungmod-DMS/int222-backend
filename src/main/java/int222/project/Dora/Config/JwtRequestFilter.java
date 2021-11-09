@@ -1,4 +1,5 @@
 package int222.project.Dora.Config;
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -17,8 +18,10 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtUserDetailsService jwtUserDetailsService;
 
@@ -33,14 +36,21 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         String username = null;
         String jwtToken = null;
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
-            try {
-                username = jwtTokenUtil.getUsernameFromToken(jwtToken);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
-            } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
+
+        if (requestTokenHeader != null) {
+            System.out.println("เข้า");
+            if (requestTokenHeader.startsWith("Bearer ")) {
+                jwtToken = requestTokenHeader.substring(7);
+                try {
+                    System.out.println(jwtToken);
+                    username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Unable to get JWT Token");
+                } catch (ExpiredJwtException e) {
+                    System.out.println("JWT Token has expired");
+                }
+            } else {
+                logger.warn("Token sometihng wrong");
             }
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
@@ -49,6 +59,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
