@@ -34,5 +34,3 @@ public class user implements Serializable {
     @OneToMany(mappedBy = "user")
     Set<favorite> favorite;
 }
-
-
