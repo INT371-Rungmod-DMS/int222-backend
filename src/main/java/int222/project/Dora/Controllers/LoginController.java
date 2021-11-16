@@ -19,7 +19,6 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login/")
     public user logIn(@RequestParam("username") String username,
                       @RequestParam("pwd") String pwd) {
         try {

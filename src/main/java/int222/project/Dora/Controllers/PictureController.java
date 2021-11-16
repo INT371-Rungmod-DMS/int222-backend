@@ -43,6 +43,20 @@ public class PictureController {
         return storageService.loadAsResource(filename);
     }
 
+    @GetMapping(value = "/AllFilebyProductID/{id}", produces = MediaType.IMAGE_PNG_VALUE)
+    public Resource[] serveFilewithArrays(@PathVariable Long id){
+        productColor productColors[] = productColorRepository.findAllByProductId(id);
+        String[] images = new String[productColors.length];
+        for (int i = 0; i < productColors.length; i++) {
+            images[i] = productColors[i].getImageName();
+        }
+        Resource[] pics = new Resource[images.length];
+        for (int i = 0; i < images.length; i++) {
+            pics[i] = storageService.loadAsResource(images[i]);
+        }
+        return pics;
+    }
+
     @DeleteMapping(value = "/deletefile", produces = MediaType.IMAGE_PNG_VALUE)
     public void deleteFile(@RequestParam("deleteimages") String filename) throws IOException {
         storageService.delete(filename);

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     UserRepository userRepository;
 
@@ -50,7 +54,8 @@ public class UserController {
     public void changPWD(@PathVariable Long id,
                          @RequestParam("password") String pwd) {
         user changePWD = userRepository.findById(id).orElse(null);
-        changePWD.setPassword(pwd);
+        String encodePWD = bCryptPasswordEncoder.encode(pwd);
+        changePWD.setPassword(encodePWD);
         userRepository.save(changePWD);
         System.out.println("Change password success");
     }
