@@ -52,11 +52,14 @@ public class UserController {
 
     @PutMapping("/{id}/profile/ChangePWD")
     public void changPWD(@PathVariable Long id,
-                         @RequestParam("password") String pwd) {
+                         @RequestParam("newPassword") String newpwd,
+                         @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
-        String encodePWD = bCryptPasswordEncoder.encode(pwd);
-        changePWD.setPassword(encodePWD);
-        userRepository.save(changePWD);
-        System.out.println("Change password success");
+        if (bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword())) {
+            String encodePWD = bCryptPasswordEncoder.encode(newpwd);
+            changePWD.setPassword(encodePWD);
+            userRepository.save(changePWD);
+            System.out.println("Change password success");
+        }
     }
 }
