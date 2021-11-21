@@ -3,6 +3,7 @@ package int222.project.Dora.Controllers;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +52,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}/profile/ChangePWD")
-    public void changPWD(@PathVariable Long id,
+    public void changPWD(@PathVariable(name="", value="", required=true) Long id,
                          @RequestParam("newPassword") String newpwd,
                          @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
@@ -63,8 +64,8 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}/profile/CheckPWD")
-    public boolean checkPWD(@PathVariable Long id,
+    @PutMapping(value = "/{id}/profile/CheckPWD")
+    public boolean checkPWD(@PathVariable(name="", value="", required=true) Long id,
                          @RequestParam("newPassword") String newpwd,
                          @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
