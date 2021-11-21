@@ -35,7 +35,9 @@ public class SuperAdminController {
     }
 
     @DeleteMapping("/DeleteUser")
-    public boolean deleteUser(@RequestParam("idUser") long idUser){
-        return  userRepository.deleteByUserId(idUser);
+    public void deleteUser(@RequestParam("idUser") long idUser){
+        user deleteuser = userRepository.findById(idUser).orElse(null);
+        System.out.println(deleteuser.getUserId() + " has been deleted");
+        userRepository.delete(deleteuser);;
     }
 }
