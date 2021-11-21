@@ -15,7 +15,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
-    @Autowired
+    @Autowired(required = true)
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
