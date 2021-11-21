@@ -51,8 +51,8 @@ public class UserController {
         return true;
     }
 
-    @PutMapping("/{id}/profile/ChangePWD")
-    public void changPWD(@PathVariable(name="", value="", required=true) Long id,
+    @PutMapping("/profile/ChangePWD")
+    public void changPWD(@RequestParam("id") Long id,
                          @RequestParam("newPassword") String newpwd,
                          @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
@@ -64,8 +64,8 @@ public class UserController {
         }
     }
 
-    @PutMapping(value = "/{id}/profile/CheckPWD")
-    public boolean checkPWD(@PathVariable(name="", value="", required=true) Long id,
+    @PutMapping(value = "/profile/CheckPWD")
+    public boolean checkPWD(@RequestParam("id") Long id,
                          @RequestParam("newPassword") String newpwd,
                          @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
