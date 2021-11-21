@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -31,5 +32,10 @@ public class SuperAdminController {
                 break;
         }
         userRepository.save(Roleuser);
+    }
+
+    @DeleteMapping("/DeleteUser")
+    public boolean deleteUser(@RequestParam("idUser") long idUser){
+        return  userRepository.deleteByUserId(idUser);
     }
 }
