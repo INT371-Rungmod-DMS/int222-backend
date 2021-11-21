@@ -3,7 +3,6 @@ package int222.project.Dora.Controllers;
 import int222.project.Dora.Models.user;
 import int222.project.Dora.Repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 @RestController
 public class UserController {
-    @Autowired(required = true)
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -51,24 +50,24 @@ public class UserController {
         return true;
     }
 
-    @PutMapping("/profile/ChangePWD")
-    public void changPWD(@RequestParam("id") Long id,
-                         @RequestParam("newPassword") String newpwd,
-                         @RequestParam("oldPassword") String oldpwd) {
-        user changePWD = userRepository.findById(id).orElse(null);
-        if (bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword())) {
-            String encodePWD = bCryptPasswordEncoder.encode(newpwd);
-            changePWD.setPassword(encodePWD);
-            userRepository.save(changePWD);
-            System.out.println("Change password success");
-        }
-    }
-
-    @PutMapping(value = "/profile/CheckPWD")
-    public boolean checkPWD(@RequestParam("id") Long id,
-                         @RequestParam("newPassword") String newpwd,
-                         @RequestParam("oldPassword") String oldpwd) {
-        user changePWD = userRepository.findById(id).orElse(null);
-        return bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword());
-    }
+//    @PutMapping("/profile/ChangePWD")
+//    public void changPWD(@RequestParam("id") Long id,
+//                         @RequestParam("newPassword") String newpwd,
+//                         @RequestParam("oldPassword") String oldpwd) {
+//        user changePWD = userRepository.findById(id).orElse(null);
+//        if (bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword())) {
+//            String encodePWD = bCryptPasswordEncoder.encode(newpwd);
+//            changePWD.setPassword(encodePWD);
+//            userRepository.save(changePWD);
+//            System.out.println("Change password success");
+//        }
+//    }
+//
+//    @PutMapping(value = "/profile/CheckPWD")
+//    public boolean checkPWD(@RequestParam("id") Long id,
+//                         @RequestParam("newPassword") String newpwd,
+//                         @RequestParam("oldPassword") String oldpwd) {
+//        user changePWD = userRepository.findById(id).orElse(null);
+//        return bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword());
+//    }
 }
