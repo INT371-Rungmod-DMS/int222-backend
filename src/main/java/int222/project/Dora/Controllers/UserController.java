@@ -62,4 +62,12 @@ public class UserController {
             System.out.println("Change password success");
         }
     }
+
+    @PutMapping("/{id}/profile/CheckPWD")
+    public boolean checkPWD(@PathVariable Long id,
+                         @RequestParam("newPassword") String newpwd,
+                         @RequestParam("oldPassword") String oldpwd) {
+        user changePWD = userRepository.findById(id).orElse(null);
+        return bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword());
+    }
 }
