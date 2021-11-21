@@ -48,10 +48,13 @@ public class UserController {
 
     @PutMapping("/{id}/profile/ChangePWD")
     public void changPWD(@PathVariable Long id,
-                         @RequestParam("password") String pwd) {
+                         @RequestParam("newPassword") String newpwd,
+                         @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
-        changePWD.setPassword(pwd);
-        userRepository.save(changePWD);
-        System.out.println("Change password success");
+        if (changePWD.getPassword() == oldpwd) {
+            changePWD.setPassword(newpwd);
+            userRepository.save(changePWD);
+            System.out.println("Change password success");
+        }
     }
 }
