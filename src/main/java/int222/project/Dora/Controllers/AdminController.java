@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:8080/")
 @RestController
 public class AdminController {
     @Autowired
