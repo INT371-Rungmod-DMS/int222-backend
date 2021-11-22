@@ -27,7 +27,7 @@ public class DoraApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("http://localhost:8080").allowedMethods("PUT", "DELETE",
-						"GET", "POST","OPTIONS").allowedHeaders("Authorization").exposedHeaders("Authorization");
+						"GET", "POST","OPTIONS").allowedHeaders("*").exposedHeaders("*");
 			}
 		};
 	}
