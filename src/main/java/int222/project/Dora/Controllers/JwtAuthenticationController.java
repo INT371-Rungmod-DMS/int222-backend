@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Objects;
 
-@CrossOrigin(origins = "http://localhost")
+@CrossOrigin(origins = "http://172.19.0.1")
 @RestController
 public class JwtAuthenticationController {
 
