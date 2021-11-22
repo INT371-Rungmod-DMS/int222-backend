@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://172.19.0.1")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class SuperAdminController {
     @Autowired

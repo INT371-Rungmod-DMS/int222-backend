@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://172.19.0.1")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class ProductColorController {
     @Autowired
