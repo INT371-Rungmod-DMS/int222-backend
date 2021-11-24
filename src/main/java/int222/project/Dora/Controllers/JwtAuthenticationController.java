@@ -3,6 +3,7 @@ package int222.project.Dora.Controllers;
 import int222.project.Dora.Config.JwtTokenUtil;
 import int222.project.Dora.Models.JwtRequest;
 import int222.project.Dora.Models.JwtResponse;
+import int222.project.Dora.Repositories.UserRepository;
 import int222.project.Dora.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Objects;
 
 @CrossOrigin
 @RestController
@@ -31,12 +30,18 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
+        System.out.println(authenticationRequest.getUsername() + " " + authenticationRequest.getPassword());
+        String roll = userRepository.findByUserName(authenticationRequest.getUsername()).getRole();
+        System.out.println(roll);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, roll));
     }
 
     private void authenticate(String username, String password) throws Exception {

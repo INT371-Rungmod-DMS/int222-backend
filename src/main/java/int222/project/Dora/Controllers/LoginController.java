@@ -61,4 +61,25 @@ public class LoginController {
             return true;
         }
     }
+
+    @PutMapping("/{id}/profile/ChangePWD")
+    public void changPWD(@PathVariable("id") Long id,
+                         @RequestParam("newPassword") String newpwd,
+                         @RequestParam("oldPassword") String oldpwd) {
+        user changePWD = userRepository.findById(id).orElse(null);
+        if (bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword())) {
+            String encodePWD = bCryptPasswordEncoder.encode(newpwd);
+            changePWD.setPassword(encodePWD);
+            userRepository.save(changePWD);
+            System.out.println("Change password success");
+        }
+    }
+
+    @PutMapping(value = "/{id}/profile/CheckPWD")
+    public boolean checkPWD(@PathVariable("id") Long id,
+                         @RequestParam("newPassword") String newpwd,
+                         @RequestParam("oldPassword") String oldpwd) {
+        user changePWD = userRepository.findById(id).orElse(null);
+        return bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword());
+    }
 }
