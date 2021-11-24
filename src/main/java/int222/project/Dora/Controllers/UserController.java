@@ -14,8 +14,6 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class UserController {
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     UserRepository userRepository;
@@ -50,24 +48,4 @@ public class UserController {
         return true;
     }
 
-//    @PutMapping("/profile/ChangePWD")
-//    public void changPWD(@RequestParam("id") Long id,
-//                         @RequestParam("newPassword") String newpwd,
-//                         @RequestParam("oldPassword") String oldpwd) {
-//        user changePWD = userRepository.findById(id).orElse(null);
-//        if (bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword())) {
-//            String encodePWD = bCryptPasswordEncoder.encode(newpwd);
-//            changePWD.setPassword(encodePWD);
-//            userRepository.save(changePWD);
-//            System.out.println("Change password success");
-//        }
-//    }
-//
-//    @PutMapping(value = "/profile/CheckPWD")
-//    public boolean checkPWD(@RequestParam("id") Long id,
-//                         @RequestParam("newPassword") String newpwd,
-//                         @RequestParam("oldPassword") String oldpwd) {
-//        user changePWD = userRepository.findById(id).orElse(null);
-//        return bCryptPasswordEncoder.matches(oldpwd, changePWD.getPassword());
-//    }
 }
