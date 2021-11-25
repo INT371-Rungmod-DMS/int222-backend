@@ -37,13 +37,13 @@ public class JwtAuthenticationController {
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
         System.out.println(authenticationRequest.getUsername() + " " + authenticationRequest.getPassword());
-        String roll = userRepository.findByUserName(authenticationRequest.getUsername()).getRole();
+        String role = userRepository.findByUserName(authenticationRequest.getUsername()).getRole();
         Long id = userRepository.findByUserName(authenticationRequest.getUsername()).getUserId();
-        System.out.println(roll);
+        System.out.println(role);
         System.out.println(id);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(token, roll, id));
+        return ResponseEntity.ok(new JwtResponse(token, role, id));
     }
 
     private void authenticate(String username, String password) throws Exception {
