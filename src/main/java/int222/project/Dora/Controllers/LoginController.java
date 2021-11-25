@@ -63,7 +63,7 @@ public class LoginController {
     }
 
     @PutMapping("/{id}/profile/ChangePWD")
-    public void changPWD(@PathVariable("id") Long id,
+    public boolean changPWD(@PathVariable("id") Long id,
                          @RequestParam("newPassword") String newpwd,
                          @RequestParam("oldPassword") String oldpwd) {
         user changePWD = userRepository.findById(id).orElse(null);
@@ -72,6 +72,10 @@ public class LoginController {
             changePWD.setPassword(encodePWD);
             userRepository.save(changePWD);
             System.out.println("Change password success");
+            return true;
+        }else {
+            System.out.println("Please check your password");
+            return false;
         }
     }
 
