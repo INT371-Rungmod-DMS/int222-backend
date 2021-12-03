@@ -77,6 +77,7 @@ public class AdminController {
         editproduct.setSize(size);
         editproduct.setBrandId(brandId);
         productRepository.save(editproduct);
+        System.out.println("test ");
         System.out.println("Edit product ID is " + editproduct.getProductId());
     }
 
