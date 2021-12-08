@@ -89,6 +89,7 @@ public class AdminController {
         if (check != 0) {
             productColor dpc[] = productColorRepository.findAllByProductId(id);
             for (int i = 0; i < dpc.length; i++) {
+                storageService.delete(dpc[i].getImageName());
                 productColorRepository.delete(dpc[i]);
             }
         }
